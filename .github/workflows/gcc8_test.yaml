@@ -15,12 +15,7 @@
 name: Gcc 8 Test
 
 on:
-  push:
-    branches:
-      - '**'
-    tags:
-      - '**'
-  pull_request:
+  workflow_dispatch: 
 
 concurrency:
   group: ${{ github.repository }}-${{ github.head_ref || github.sha }}-${{ github.workflow }}
@@ -67,6 +62,6 @@ jobs:
           CC: gcc-8
           CXX: g++-8
         run: ci/scripts/build_paimon.sh --source_dir "$(pwd)"
-      - name: Show ccache statistics
-        if: always()
-        run: ccache -s
+      # - name: Show ccache statistics
+      #   if: always()
+      #   run: ccache -s
